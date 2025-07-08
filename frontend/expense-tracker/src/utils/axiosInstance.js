@@ -5,7 +5,7 @@ const axiosInstance = axios.create({
     baseURL: Base_URL,
     timeout: 10000,
     headers: {
-        "Content-Type": "pplication/json",
+        "Content-Type": "application/json",
         Accept: "application/json",
     },
 });
@@ -26,19 +26,19 @@ axiosInstance.interceptors.request.use(
 
 // Response Interceptor
 axiosInstance.interceptors.response.use(
-    (reponse) => {
+    (response) => {
         return response;
     },
     (error) => {
         // Handle common errorsglobally
-        if(error.reponse) {
-            if(error.reponse.status === 401) {
+        if(error.response) {
+            if(error.response.status === 401) {
                 // Redirect to login page
                 window.location.href = "/login";
-            } else if (error.reponse.status === 500) {
+            } else if (error.response.status === 500) {
                 console.error("Server error.Please try again later.");
             }
-        } else if (error.code == "ECONNABORATED") {
+        } else if (error.code == "ECONNABORTED") {
             console.error("Request timeout. Please try again.");
         }
         return Promise.reject(error);
