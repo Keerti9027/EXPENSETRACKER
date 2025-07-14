@@ -8,7 +8,10 @@ const ProfilePhotoSelector = ({ image, setImage }) => {
     const handleImageChange = (event) => {
         const file = event.target.files[0];
         if (file) {
+            // Update the image state
             setImage(file);
+
+            // Generate preview UPL from the file
             const preview = URL.createObjectURL(file);
             setPreviewUrl(preview);
         }
@@ -65,3 +68,4 @@ const ProfilePhotoSelector = ({ image, setImage }) => {
 };
 
 export default ProfilePhotoSelector;
+ 

@@ -54,7 +54,7 @@ exports.deleteExpense = async (req, res) => {
 
 // Download Excel
 exports.downloadExpenseExcel = async (req, res) => {
-  const userId = req.user.id;
+        const userId = req.user.id;
     try {
         const expense = await Expense.find({ userId }).sort({ date: -1 });
         

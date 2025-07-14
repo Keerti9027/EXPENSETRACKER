@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 
 //Generate JWT token 
 const generateToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "7d" });
+    return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "1h" });
 };
 
     
@@ -49,7 +49,6 @@ exports.registerUser = async (req, res) => {
 // Login User
 exports.loginUser = async (req, res) => {
     const { email, password } = req.body;
-    
 
     if (!email || !password) {
         return res.status(400).json({ message: "All fields are required" });
@@ -80,7 +79,7 @@ exports.getUserInfo = async (req, res) => {
         const user = await User.findById(req.user.id).select("-password");
 
         if(!user){
-            return res.status(404).json({message: "User not found" });
+            return res.status(404).json({ message: "User not found" });
         }
 
         res.status(200).json(user);

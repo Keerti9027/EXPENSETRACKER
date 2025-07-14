@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaEye, FaEyeSlash } from "react-icons/fa6";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 
 const Input = ({ value, onChange, placeholder, label, type }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -12,9 +12,9 @@ const Input = ({ value, onChange, placeholder, label, type }) => {
     <div>
       <label className="text-[13px] text-slate-800">{label}</label>
 
-      <div className="input-box flex items-center border p-2 rounded-md">
+      <div className="input-box">
         <input 
-          type={type === 'password' ? (showPassword ? 'text' : 'password') : type}
+          type={type === 'password' ? showPassword ? 'text' : 'password' : type}
           placeholder={placeholder}
           className="w-full bg-transparent outline-none"
           value={value}
@@ -22,19 +22,21 @@ const Input = ({ value, onChange, placeholder, label, type }) => {
         />
 
         {type === "password" && (
-          showPassword ? (
-            <FaEye
-              size={22}
-              className="text-primary cursor-pointer"
-              onClick={toggleShowPassword}
-            />
-          ) : (
-            <FaEyeSlash
-              size={22}
-              className="text-slate-400 cursor-pointer"
-              onClick={toggleShowPassword}
-            />
-          )
+          <>
+            {showPassword ? (
+              <FaRegEye
+                size={22}
+                className="text-primary cursor-pointer"
+                onClick={() => toggleShowPassword()}
+              />
+            ) : (
+              <FaRegEyeSlash
+                size={22}
+                className="text-slate-400 cursor-pointer"
+                onClick={() => toggleShowPassword()}
+              />
+            )}
+          </>
         )}
       </div>
     </div>
@@ -42,3 +44,4 @@ const Input = ({ value, onChange, placeholder, label, type }) => {
 };
 
 export default Input;
+ 
