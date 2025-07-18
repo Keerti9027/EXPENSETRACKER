@@ -1,6 +1,7 @@
 import React from "react";
 import { XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Area, AreaChart } from "recharts";
 
+
 const CustomerLineChart = ({ data }) => {
 
     const CustomTooltip = ({ active, payload }) => {
