@@ -3,13 +3,22 @@ import { LuArrowRight } from 'react-icons/lu';
 import moment from 'moment';
 import TransactionInfoCard from "../Cards/TransactionInfoCard";
 
-const RecentTransactions = ({ transactions, onSeeMore }) => {
+const RecentTransactions = ({ transactions, onSeeMore, seeAllRoute = "/expense" }) => {
     return (
         <div className="card">
             <div className="flex items-center justify-between">
                 <h5 className="text-lg">Recent Transactions</h5>
 
-                <button className="card-btn" onClick={onSeeMore}>
+                <button
+                    className="card-btn"
+                    onClick={() => {
+                        if (onSeeMore) {
+                            onSeeMore();
+                        } else {
+                            window.location.href = seeAllRoute;
+                        }
+                    }}
+                >
                     See All <LuArrowRight className="text-base" />
                 </button>
             </div>

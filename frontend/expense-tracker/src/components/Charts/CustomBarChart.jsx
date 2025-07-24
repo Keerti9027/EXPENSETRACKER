@@ -6,61 +6,76 @@ import {
    YAxis,
    CartesianGrid,
    Tooltip,
-   Legend,
    ResponsiveContainer,
    Cell, 
+   LabelList,
 } from "recharts";
 
+const COLORS = ["#875CF5", "#FA2C37", "#FF6900", "#4f39f6", "#00C49F", "#FFBB28"];
 
-const CustomBarChart = ({data}) => {
-
-    // Function to alternate colors
-    const getBarColor = (index) => {
-        return index % 2 === 0 ? "#875cf5" : "#cfbefb";
-    };
-
-    const CustomTooltip = ({ active, payload }) => {
-        if(active && payload && payload.length) {
-            return (
-                <div className="bg-white shadow-md rounded-lg p-2 border border-gray-300">
-                    <p className="text-xs font-semibold text-purple-800 mb-1">
-                        {payload[0].payload.category}</p>
-                    <p className="text-sm text-gray-600">
-                        Amount: <span className="text-sm font-medium text-gray-900">
-                        ${payload[0].payload.amount}</span>
-                    </p>
-                </div>
-            );
-        }
-        return null;
-    };
-
-    return (
-        <div className="bg-white mt-6">
-            <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={data}>
-                    <CartesianGrid stroke="none" />
-
-                    <XAxis dataKey="month" tick={{ fontSize: 12, fill: "#555"}} stroke="none" />
-                    <YAxis tick={{ fontSize: 12, fill: "#555"}} stroke="none" />
-
-                    <Tooltip content={<CustomTooltip />} />
-
-                    <Bar
-                        dataKey="amount"
-                        fill="#FF8042"
-                        radius={[10, 10, 0, 0]}
-                        activeDot={{ r:8, fill: "yellow" }}
-                        activeStyle={{fill: "green" }}
-                    >
-                        {data.map((entry, index) => (
-                            <Cell key={index} fill={getBarColor(index)} />
-                        ))}
-                    </Bar>
-                </BarChart>
-            </ResponsiveContainer>
+const CustomBarChart = ({ data }) => {
+  // Custom Tooltip
+  const CustomTooltip = ({ active, payload }) => {
+    if (active && payload && payload.length) {
+      const { date, month, amount, name } = payload[0].payload;
+      return (
+        <div className="bg-white shadow-lg rounded-lg p-3 border border-gray-200">
+          <div className="font-semibold text-primary mb-1">
+            {date || month || name}
+          </div>
+          <div className="text-gray-700">
+            Amount: <span className="font-bold text-green-600">₹{amount}</span>
+          </div>
         </div>
-    );
+      );
+    }
+    return null;
+  };
+
+  return (
+    <div className="bg-white rounded-xl shadow p-4">
+      <ResponsiveContainer width="100%" height={320}>
+        <BarChart data={data} barCategoryGap="20%">
+          <defs>
+            <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#875cf5" stopOpacity={0.9} />
+              <stop offset="100%" stopColor="#cfbefb" stopOpacity={0.3} />
+            </linearGradient>
+          </defs>
+          <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#eee" />
+          <XAxis
+            dataKey={data[0]?.date ? "date" : "month"}
+            tick={{ fontSize: 13, fill: "#7c3aed" }}
+            axisLine={false}
+            tickLine={false}
+          />
+          <YAxis
+            tick={{ fontSize: 13, fill: "#7c3aed" }}
+            axisLine={false}
+            tickLine={false}
+          />
+          <Tooltip content={<CustomTooltip />} />
+          <Bar
+            dataKey="amount"
+            radius={[16, 16, 0, 0]}
+            fill="url(#barGradient)"
+            barSize={36}
+            animationDuration={800}
+          >
+            <LabelList
+              dataKey="amount"
+              position="top"
+              style={{ fill: "#7c3aed", fontWeight: "bold", fontSize: 13 }}
+              formatter={(value) => `₹${value}`}
+            />
+            {data.map((entry, index) => (
+              <Cell key={index} fill={COLORS[index % COLORS.length]} />
+            ))}
+          </Bar>
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+  );
 };
 
 export default CustomBarChart;

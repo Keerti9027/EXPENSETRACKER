@@ -21,7 +21,7 @@ const ExpenseList = ({transactions, onDelete, onDownload}) => {
             title={expense.category}
             icon={expense.icon}
             date={moment(expense.date).format("Do MMM YYYY")}
-            amount={expense.amount}
+            amount={`₹${expense.amount}`}
             type="expense"
             onDelete={() => onDelete(expense._id)}
           />
@@ -30,6 +30,5 @@ const ExpenseList = ({transactions, onDelete, onDownload}) => {
     </div>
   )
 }
-
 
 export default ExpenseList;

@@ -3,10 +3,10 @@ import { SIDE_MENU_DATA } from "../../utils/data";
 import { UserContext } from "../../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import CharAvtar from "../Cards/CharAvatar";
+import { LuUser } from "react-icons/lu";
 
 const SideMenu = ({ activeMenu }) => {
     const { user, clearUser } = useContext(UserContext);
-
     const navigate = useNavigate();
 
     const handleClick = (route) => {
@@ -14,7 +14,6 @@ const SideMenu = ({ activeMenu }) => {
             handleLogout();
             return;
         }
-
         navigate(route);
     };
 
@@ -44,6 +43,15 @@ const SideMenu = ({ activeMenu }) => {
                 {user?.fullName || ""}
             </h5>
         </div>
+
+        {/* Profile menu item */}
+        <button
+            className={`w-full flex items-center gap-4 text-[15px] ${activeMenu === 'Profile' ? "text-white bg-primary" : ""} py-3 px-6 rounded-lg mb-3`}
+            onClick={() => handleClick('/profile')}
+        >
+            <LuUser className="text-xl" />
+            Profile
+        </button>
 
         {SIDE_MENU_DATA.map((item, index) => (
             <button

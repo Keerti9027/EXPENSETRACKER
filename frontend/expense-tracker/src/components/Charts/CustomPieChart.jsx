@@ -17,6 +17,8 @@ const CustomPieChart =({
     colors,
     showTextAnchor,
 }) => {
+    // Replace $ with ₹ in totalAmount if present
+    const displayAmount = typeof totalAmount === 'string' ? totalAmount.replace('$', '₹') : totalAmount;
     return <ResponsiveContainer width="100%" height={380}>
         <PieChart>
             <Pie 
@@ -33,7 +35,7 @@ const CustomPieChart =({
                     <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
                 ))}
                 </Pie>
-                <Tooltip content={< CustomTooltip />} />
+                <Tooltip content={< CustomTooltip symbol="₹" />} />
                 <Legend content={< CustomLegend />} />
 
                 {showTextAnchor && (
@@ -57,7 +59,7 @@ const CustomPieChart =({
                             fontSize="24px"
                             fontWeight="semi-bold"
                         >
-                            {totalAmount}
+                            {displayAmount}
                         </text>
                     </>
                 )}

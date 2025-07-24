@@ -76,7 +76,7 @@ const SignUp = () => {
         updateUser(user);
 
         console.log("Navigating to dashboard...");
-        navigate("/login");
+        navigate("/dashboard");
       }
 
     } catch (error) {

@@ -1,37 +1,27 @@
 import React from 'react';
-import CARD_2 from "../../assets/images/card2.png";
-import { LuTrendingUpDown } from "react-icons/lu";
-import StatsInfoCard from './StatsInfoCard';
+import loginGif from '../../assets/images/Login.GIF'; // Save your GIF with this name in the correct folder
+import Navbar from './Navbar';
 
 const AuthLayout = ({ children }) => {
   return (
-    <div className="flex">
-      <div className="w-screen h-screen md:w-[60vw] px-12 pt-8 pb-12">
-        <h2 className="text-lg font-medium text-black">Expense Tracker</h2>
-        {children}
-      </div>
-
-      <div className="hidden md:block w-[40vw] h-screen bg-violet-50 bg-auth-bg-img bg-cover bg-no-repeat bg-center overflow-hidden p-8 relative">
-        <div className="w-48 h-48 rounded-[40px] bg-purple-600 absolute -top-7 -left-5" />
-        <div className="w-48 h-56 rounded-[40px] border-[20px] border-fuchsia-600 absolute top-[30%] -right-10" />
-        <div className="w-48 h-48 rounded-[40px] bg-violet-500 absolute -bottom-7 -left-5" />
-
-        <div className="grid grid-cols-1 z-20">
-          <StatsInfoCard
-            icon={<LuTrendingUpDown />}
-            label="Track your Income & Expenses"
-            value="430,000"
-            color="bg-primary"
+    <>
+      <Navbar />
+      <div className="flex flex-col md:flex-row min-h-screen bg-gradient-to-br from-blue-200 to-green-200 items-center justify-center px-2 sm:px-4">
+        {/* Left Side - Form */}
+        <div className="bg-white rounded-2xl shadow-lg w-full max-w-md md:w-[60%] lg:w-[40%] p-6 sm:p-8 md:mx-10 my-8 md:my-10">
+          <h2 className="text-lg md:text-xl font-medium text-black mb-4 text-center md:text-left">Expense Tracker</h2>
+          {children}
+        </div>
+        {/* Right Side - GIF Animation */}
+        <div className="hidden md:flex w-[40%] h-full items-center justify-center">
+          <img
+            src={loginGif}
+            alt="Login Animation"
+            className="w-[220px] sm:w-[320px] md:w-[400px] lg:w-[500px] h-auto object-contain"
           />
         </div>
-
-        <img
-          src={CARD_2}
-          className="w-64 lg:w-[90%] absolute bottom-10 shadow-lg shadow-blue-400/15"
-          alt="Card"
-        />
       </div>
-    </div>
+    </>
   );
 };
 

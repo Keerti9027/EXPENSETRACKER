@@ -29,11 +29,12 @@ export const addThousandsSeprator = (num) => {
 };
 
 export const prepareExpenseBarChartData = (data = []) => {
-    const chartData = data.map((item) => ({
-        category:item?.category,
+    const sortedData = [...data].sort((a, b) => new Date(a.date) - new Date(b.date));
+    const chartData = sortedData.map((item) => ({
+        date: item?.date ? moment(item?.date).format('DD MMM YYYY') : '',
         amount: item?.amount,
+        category: item?.category,
     }));
-
     return chartData;
 };
 
