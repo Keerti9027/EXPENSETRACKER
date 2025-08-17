@@ -1,0 +1,24 @@
+{
+  "name": "expensetracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Keerti9027/EXPENSETRACKER.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Keerti9027/EXPENSETRACKER/issues"
+  },
+  "homepage": "https://github.com/Keerti9027/EXPENSETRACKER#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
